@@ -12,7 +12,9 @@
     "preinstall": "npx husky install"
   },
   "dependencies": {
+    "@react-three/drei": "^9.68.3",
     "@react-three/fiber": "^8.13.0",
+    "@tweenjs/tween.js": "^20.0.3",
     "@types/node": "20.2.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
