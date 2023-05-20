@@ -15,7 +15,7 @@ export const Controls = () => {
     const screen = ratio * (window.innerWidth / window.innerHeight) // visible width
 
     // Use the size of the plane
-    const size = 8
+    const size = 7.8
 
     if (window.innerWidth >= window.innerHeight)
       setLastValidMaxDistance(size / screen)

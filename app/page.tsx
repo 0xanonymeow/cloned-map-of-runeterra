@@ -12,12 +12,7 @@ const Home = () => {
     <main className="w-screen h-screen">
       <Image src="/loading-background.jpg" fill alt="loading-background" />
       <Canvas>
-        <PerspectiveCamera
-          fov={75}
-          position={[0, 0, 10]}
-          near={0.1}
-          far={100}
-        />
+        <PerspectiveCamera fov={75} position={[0, 0, 1]} near={0.1} far={100} />
         <directionalLight position={[0, 0, 1]} intensity={1} />
         <Terrain />
         <Controls />
