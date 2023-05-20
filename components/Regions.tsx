@@ -1,5 +1,7 @@
+import { useFonts } from '@/hooks/useFonts'
 import { useLoader } from '@react-three/fiber'
-import { map } from 'lodash'
+import TextTexture from '@seregpie/three.text-texture'
+import { map, upperCase } from 'lodash'
 import { useState } from 'react'
 import { TextureLoader } from 'three'
 
@@ -14,6 +16,32 @@ const pos = [
   [0.2, -1.25],
   [1, -1.2],
   [2.45, -1.35],
+]
+
+const terrains = [
+  'freljord',
+  'noxus',
+  'ionia',
+  'demacia',
+  'piltover & zaun',
+  'bilgewater',
+  'targon',
+  'shurima',
+  'ixtal',
+  'shadow isles',
+]
+
+const terrainPos = [
+  [-1.3, 0.85],
+  [-0.03, 0.45],
+  [2.16, 0.7],
+  [-1.6, 0.1],
+  [0.65, -0.65],
+  [2, -0.8],
+  [-0.85, -1.5],
+  [0.2, -1.4],
+  [1, -1.35],
+  [2.45, -1.5],
 ]
 
 export const Regions = () => {
@@ -83,6 +111,8 @@ export const Regions = () => {
     setTerrainOpacities(opacities)
   }
 
+  const { BeaufortforLOL } = useFonts()
+
   return (
     <group>
       {map(textures, (texture, i) => (
@@ -102,6 +132,25 @@ export const Regions = () => {
           <spriteMaterial map={texture} />
         </sprite>
       ))}
+      {map(terrains, (terrain, i) => {
+        const texture = new TextTexture({
+          fontSize: 16,
+          text: upperCase(terrain),
+          fontFamily: BeaufortforLOL.style.fontFamily,
+          strokeColor: '#392618',
+          strokeWidth: 0.085,
+        })
+        texture.redraw()
+        return (
+          <sprite
+            key={i}
+            scale={[0.4, 0.15, 0]}
+            position={[...terrainPos[i], 0.3]}
+          >
+            <spriteMaterial map={texture} />
+          </sprite>
+        )
+      })}
       {map(terrainTextures, (texture, i) => (
         <sprite key={i} scale={[7, 7, 0]} position={[0, 0, 0.3]}>
           <spriteMaterial map={texture} opacity={terrainOpacities[i]} />
