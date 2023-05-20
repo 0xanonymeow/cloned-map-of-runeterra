@@ -33,8 +33,10 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "@types/lodash": "^4.14.194",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.0",
+    "lodash": "^4.17.21",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0"
   }
