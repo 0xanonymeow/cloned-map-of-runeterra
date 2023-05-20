@@ -1,6 +1,6 @@
-import { Plane } from '@react-three/drei'
-import { useLoader } from '@react-three/fiber'
-import { TextureLoader } from 'three'
+import { Plane } from "@react-three/drei"
+import { useLoader } from "@react-three/fiber"
+import { TextureLoader } from "three"
 
 export const Terrain = () => {
   const [height, texture, specular] = useLoader(TextureLoader, [
