@@ -11,7 +11,7 @@ export const Terrain = () => {
 
   return (
     <mesh>
-      <Plane args={[8, 8, 1000, 1000]}>
+      <Plane args={[7.8, 7.8, 1000, 1000]}>
         <meshPhongMaterial
           attach="material"
           map={texture}

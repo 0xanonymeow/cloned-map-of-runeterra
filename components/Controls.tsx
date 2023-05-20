@@ -32,7 +32,6 @@ export const Controls = () => {
     let targetPosition = controls.current.target.clone()
 
     const zoom = (event) => {
-      console.log(controls.current.getPolarAngle())
       const currentZoomLevel = getZoomLevel()
 
       let direction = new Vector3(0, 0, 0)
