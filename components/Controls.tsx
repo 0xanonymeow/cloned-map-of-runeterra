@@ -77,18 +77,16 @@ export const Controls = () => {
       }
 
       // check if camera position z would be less than 0
-      if (targetPosition.z < 0) {
-        targetPosition.z = 0
-      }
+      // if (targetPosition.z < 0) {
+      //   targetPosition.z = 0
+      // }
 
       if (currentZoomLevel <= 1.8) {
-        targetPosition.y = -0.25
-        targetPosition
+        // targetPosition.y = -0.25
       } else if (currentZoomLevel <= 1.5) {
-        targetPosition.y = -0.5
-        targetPosition
+        // targetPosition.y = -0.5
       } else if (currentZoomLevel > 1.5) {
-        targetPosition.y = 0
+        // targetPosition.y = 0
       }
 
       camera.position.lerp(targetPosition, smoothness)
