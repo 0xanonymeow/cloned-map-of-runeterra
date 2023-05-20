@@ -3,7 +3,7 @@ import { useThree } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 import { MOUSE, Vector3 } from 'three'
 
-export const Controls = () => {
+export const Controls = ({ isConnected }) => {
   const controls = useRef()
   const { camera, gl } = useThree()
   const [lastValidMaxDistance, setLastValidMaxDistance] = useState(3) // Initial value
@@ -22,7 +22,7 @@ export const Controls = () => {
   }
 
   useEffect(() => {
-    if (!controls.current || !controls.current.target) return
+    if (!controls.current || !controls.current.target || !isConnected) return
 
     const getZoomLevel = () => {
       return camera.position.distanceTo(controls.current.target)
@@ -76,17 +76,12 @@ export const Controls = () => {
         targetPosition = potentialTarget
       }
 
-      // check if camera position z would be less than 0
-      // if (targetPosition.z < 0) {
-      //   targetPosition.z = 0
-      // }
-
       if (currentZoomLevel <= 1.8) {
-        // targetPosition.y = -0.25
+        targetPosition.y = -0.25
       } else if (currentZoomLevel <= 1.5) {
-        // targetPosition.y = -0.5
+        targetPosition.y = -0.5
       } else if (currentZoomLevel > 1.5) {
-        // targetPosition.y = 0
+        targetPosition.y = 0
       }
 
       camera.position.lerp(targetPosition, smoothness)
@@ -95,7 +90,13 @@ export const Controls = () => {
     window.addEventListener('wheel', zoom)
 
     return () => window.removeEventListener('wheel', zoom)
-  }, [camera.position, controls.current, camera.fov, lastValidMaxDistance])
+  }, [
+    isConnected,
+    camera.position,
+    controls.current,
+    camera.fov,
+    lastValidMaxDistance,
+  ])
 
   useEffect(() => {
     calculateMaxDistance()
