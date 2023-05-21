@@ -3,12 +3,13 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { forwardRef, useEffect, useState } from 'react'
 import { MOUSE, Quaternion } from 'three'
 
-const Controls = forwardRef(({ isLoggedIn }, ref) => {
+const Controls = forwardRef(({ isLoggedIn }: { isLoggedIn: boolean }, ref) => {
   const { camera, gl } = useThree()
   const [lastValidMaxDistance, setLastValidMaxDistance] = useState(3) // Initial value
   const minDistance = 0.7
 
   const calculateMaxDistance = () => {
+    // @ts-ignore
     const vFOV = (camera.fov * Math.PI) / 180 // convert vertical fov to radians
     const ratio = 2 * Math.tan(vFOV / 2) // visible height
     const screen = ratio * (window.innerWidth / window.innerHeight) // visible width
@@ -38,6 +39,7 @@ const Controls = forwardRef(({ isLoggedIn }, ref) => {
 
   return (
     <OrbitControls
+      // @ts-ignore
       ref={ref}
       minDistance={minDistance}
       maxDistance={lastValidMaxDistance}

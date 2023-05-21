@@ -1,10 +1,18 @@
-import { useFrame } from '@react-three/fiber'
+// @ts-nocheck
+import { MeshProps, useFrame } from '@react-three/fiber'
+import { RefObject } from 'react'
 import { Color } from 'three'
 
-export const FadingMesh = ({ meshRef, fade }) => {
+export const FadingMesh = ({
+  meshRef,
+  fade,
+}: {
+  meshRef: RefObject<MeshProps>
+  fade: boolean
+}) => {
   // Animation logic
   useFrame(() => {
-    if (!fade) return
+    if (!fade || !meshRef || !meshRef.current) return
     if (meshRef.current.material.opacity > 0) {
       meshRef.current.material.opacity -= 0.01
       meshRef.current.material.needsUpdate = true

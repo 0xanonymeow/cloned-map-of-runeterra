@@ -6,14 +6,24 @@ import {
   metamaskWallet,
   walletConnect,
 } from '@thirdweb-dev/react'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-export const Web3Connect = ({ setIsLoggedIn, hide, buttonOpacity }) => {
+interface Web3ConnectProps {
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>
+  hide: boolean
+  buttonOpacity: number
+}
+
+export const Web3Connect = ({
+  setIsLoggedIn,
+  hide,
+  buttonOpacity,
+}: Web3ConnectProps) => {
   const { BeaufortforLOL } = useFonts()
   const [display, setDisplay] = useState('flex')
 
   useEffect(() => {
-    let timeout
+    let timeout: NodeJS.Timeout
     if (hide) timeout = setTimeout(() => setDisplay('none'), 300)
 
     return () => clearTimeout(timeout)

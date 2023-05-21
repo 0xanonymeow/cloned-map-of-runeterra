@@ -1,14 +1,27 @@
+// @ts-nocheck
 import { useFonts } from '@/hooks/useFonts'
 import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import TextTexture from '@seregpie/three.text-texture'
 import { map } from 'lodash'
 import { useState } from 'react'
-import { Mesh, MeshBasicMaterial, TextureLoader } from 'three'
+import {
+  Mesh,
+  MeshBasicMaterial,
+  Object3D,
+  Texture,
+  TextureLoader,
+} from 'three'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+
+interface ObjToPrimitiveProps {
+  obj: Object3D[]
+  texture: Texture[]
+  hide: boolean
+}
 
 const pos = [[-0.75, 1.6]]
 
-const objToPrimitive = ({ obj, texture, hide }) => {
+const objToPrimitive = ({ obj, texture, hide }: ObjToPrimitiveProps) => {
   obj.traverse((child) => {
     if (child instanceof Mesh) {
       const mat = new MeshBasicMaterial()

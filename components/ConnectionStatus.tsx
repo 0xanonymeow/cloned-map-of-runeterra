@@ -1,7 +1,11 @@
 import { useConnectionStatus } from '@thirdweb-dev/react'
-import { useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 
-export const ConnectionStatus = ({ setIsLoggedIn }) => {
+export const ConnectionStatus = ({
+  setIsLoggedIn,
+}: {
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>
+}) => {
   const connectionStatus = useConnectionStatus()
 
   useEffect(() => {
