@@ -113,6 +113,15 @@ const Regions = forwardRef((_, ref) => {
     setTerrainOpacities(opacities)
   }
 
+  const onClick = (e) => {
+    const { x, y, z } = e.eventObject.position
+    camera.position.x = x
+    camera.position.y = y
+    camera.position.z = 0.7
+    ref.current.target.x = x
+    ref.current.target.y = y
+  }
+
   const { BeaufortforLOL } = useFonts()
   const { camera } = useThree()
 
@@ -127,6 +136,7 @@ const Regions = forwardRef((_, ref) => {
           key={i}
           onPointerOver={(e) => onHover(e, i)}
           onPointerLeave={(e) => onLeave(e, i)}
+          onClick={onClick}
           scale={[
             0.25,
             i === 4 // piltover & zaun

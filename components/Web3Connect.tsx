@@ -6,9 +6,18 @@ import {
   metamaskWallet,
   walletConnect,
 } from '@thirdweb-dev/react'
+import { useEffect, useState } from 'react'
 
 export const Web3Connect = ({ setIsLoggedIn, hide, buttonOpacity }) => {
   const { BeaufortforLOL } = useFonts()
+  const [display, setDisplay] = useState('flex')
+
+  useEffect(() => {
+    let timeout
+    if (hide) timeout = setTimeout(() => setDisplay('none'), 300)
+
+    return () => clearTimeout(timeout)
+  }, [hide])
 
   return (
     <ThirdwebProvider
@@ -21,6 +30,7 @@ export const Web3Connect = ({ setIsLoggedIn, hide, buttonOpacity }) => {
       <div
         className="absolute top-[50%] left-[50%] z-10 translate-x-[-50%] translate-y-[-25%] flex flex-col items-center"
         style={{
+          display,
           opacity: hide ? 0 : 1,
           transition: 'opacity 0.3s',
         }}

@@ -6,7 +6,7 @@ import { MOUSE, Quaternion } from 'three'
 const Controls = forwardRef(({ isLoggedIn }, ref) => {
   const { camera, gl } = useThree()
   const [lastValidMaxDistance, setLastValidMaxDistance] = useState(3) // Initial value
-  const minDistance = 0.6
+  const minDistance = 0.7
 
   const calculateMaxDistance = () => {
     const vFOV = (camera.fov * Math.PI) / 180 // convert vertical fov to radians

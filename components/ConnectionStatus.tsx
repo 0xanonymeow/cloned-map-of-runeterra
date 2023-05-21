@@ -6,7 +6,7 @@ export const ConnectionStatus = ({ setIsLoggedIn }) => {
 
   useEffect(() => {
     if (connectionStatus === 'connected') setIsLoggedIn(true) // connectionStatus will turn to disconnected right away after it's connected. setIsLoggedIn to true to prevent inconsistency
-  }, [connectionStatus])
+  }, [connectionStatus, setIsLoggedIn])
 
   return <></>
 }
