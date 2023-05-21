@@ -3,7 +3,7 @@ import { useThree } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 import { MOUSE, Vector3 } from 'three'
 
-export const Controls = ({ isConnected }) => {
+export const Controls = ({ isLoggedIn }) => {
   const controls = useRef()
   const { camera, gl } = useThree()
   const [lastValidMaxDistance, setLastValidMaxDistance] = useState(3) // Initial value
@@ -22,7 +22,7 @@ export const Controls = ({ isConnected }) => {
   }
 
   useEffect(() => {
-    if (!controls.current || !controls.current.target || !isConnected) return
+    if (!controls.current || !controls.current.target || !isLoggedIn) return
 
     const getZoomLevel = () => {
       return camera.position.distanceTo(controls.current.target)
@@ -91,7 +91,7 @@ export const Controls = ({ isConnected }) => {
 
     return () => window.removeEventListener('wheel', zoom)
   }, [
-    isConnected,
+    isLoggedIn,
     camera.position,
     controls.current,
     camera.fov,
@@ -116,6 +116,7 @@ export const Controls = ({ isConnected }) => {
       autoRotate={false}
       enableRotate={false}
       enableZoom={false}
+      enablePan={isLoggedIn}
       zoomSpeed={0.8}
       mouseButtons={{
         LEFT: MOUSE.PAN,
