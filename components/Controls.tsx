@@ -49,6 +49,7 @@ const Controls = forwardRef(({ isLoggedIn }: { isLoggedIn: boolean }, ref) => {
       autoRotate={false}
       enableRotate={false}
       enablePan={isLoggedIn}
+      enableZoom={isLoggedIn}
       zoomSpeed={0.9}
       mouseButtons={{
         LEFT: MOUSE.PAN,
