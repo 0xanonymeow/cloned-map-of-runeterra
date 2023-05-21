@@ -1,8 +1,8 @@
 import { useFonts } from '@/hooks/useFonts'
-import { useLoader } from '@react-three/fiber'
+import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import TextTexture from '@seregpie/three.text-texture'
 import { map, upperCase } from 'lodash'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import { TextureLoader } from 'three'
 
 const pos = [
@@ -44,7 +44,7 @@ const terrainPos = [
   [2.45, -1.5],
 ]
 
-export const Regions = () => {
+const Regions = forwardRef((_, ref) => {
   const textures = useLoader(TextureLoader, [
     '/assets/images/regions/freljord.png',
     '/assets/images/regions/noxus.png',
@@ -85,6 +85,8 @@ export const Regions = () => {
     ...Array(9).fill(0),
   ])
 
+  const [hide, setHide] = useState(false)
+
   const onHover = (e, i: number) => {
     e.eventObject.material.map = hoverTextures[i]
     if (i === 4) return // piltover & zaun
@@ -112,6 +114,11 @@ export const Regions = () => {
   }
 
   const { BeaufortforLOL } = useFonts()
+  const { camera } = useThree()
+
+  useFrame(() => {
+    setHide(camera.position.z < 1)
+  })
 
   return (
     <group>
@@ -129,7 +136,7 @@ export const Regions = () => {
           ]}
           position={[...pos[i], 0.3]}
         >
-          <spriteMaterial map={texture} />
+          <spriteMaterial map={texture} opacity={hide ? 0 : 1} />
         </sprite>
       ))}
       {map(terrains, (terrain, i) => {
@@ -147,15 +154,22 @@ export const Regions = () => {
             scale={[0.4, 0.15, 0]}
             position={[...terrainPos[i], 0.3]}
           >
-            <spriteMaterial map={texture} />
+            <spriteMaterial map={texture} opacity={hide ? 0 : 1} />
           </sprite>
         )
       })}
       {map(terrainTextures, (texture, i) => (
         <sprite key={i} scale={[7, 7, 0]} position={[0, 0, 0.3]}>
-          <spriteMaterial map={texture} opacity={terrainOpacities[i]} />
+          <spriteMaterial
+            map={texture}
+            opacity={hide ? 0 : terrainOpacities[i]}
+          />
         </sprite>
       ))}
     </group>
   )
-}
+})
+
+Regions.displayName = 'Regions'
+
+export { Regions }
