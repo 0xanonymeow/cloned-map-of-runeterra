@@ -125,11 +125,11 @@ const Regions = forwardRef(
 
     const onClick = (e, i) => {
       const { x, y, z } = e.eventObject.position
-      camera.position.x = x
-      camera.position.y = y
+      camera.position.x = x + 0.3
+      camera.position.y = y - 0.4
       camera.position.z = 0.7
-      ref.current.target.x = x
-      ref.current.target.y = y
+      ref.current.target.x = x + 0.3
+      ref.current.target.y = y - 0.4
 
       if (i !== 0) return // freljord
       setContent('freljord')
