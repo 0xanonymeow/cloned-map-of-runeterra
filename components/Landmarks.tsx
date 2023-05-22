@@ -3,7 +3,7 @@ import { useFonts } from '@/hooks/useFonts'
 import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import TextTexture from '@seregpie/three.text-texture'
 import { map } from 'lodash'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import {
   Mesh,
   MeshBasicMaterial,
@@ -36,7 +36,13 @@ const objToPrimitive = ({ obj, texture, hide }: ObjToPrimitiveProps) => {
   return <primitive object={obj} />
 }
 
-export const Landmarks = () => {
+export const Landmarks = ({
+  setContent,
+  setIsExpanded,
+}: {
+  setContent: Dispatch<SetStateAction<string>>
+  setIsExpanded: Dispatch<SetStateAction<boolean>>
+}) => {
   const objs = useLoader(OBJLoader, ['/assets/obj/landmarks/frostguard.obj'])
   const textures = useLoader(TextureLoader, [
     '/assets/obj/landmarks/frostguard.jpg',
@@ -57,6 +63,11 @@ export const Landmarks = () => {
   })
   textTexture.redraw()
 
+  const onClick = () => {
+    setContent('frostguardCitadel')
+    setIsExpanded(true)
+  }
+
   useFrame(() => {
     setHide(camera.position.z > 1)
   })
@@ -68,12 +79,14 @@ export const Landmarks = () => {
           {objToPrimitive({ obj, texture: textures[i], hide })}
         </mesh>
       ))}
-      <sprite position={[-0.85, 1.35, 0.1]} scale={[0.05, 0.05, 1]}>
-        <spriteMaterial map={icon} opacity={hide ? 0 : 1} />
-      </sprite>
-      <sprite scale={[0.3, 0.05, 0]} position={[-0.82, 1.21, 0.2]}>
-        <spriteMaterial map={textTexture} opacity={hide ? 0 : 1} />
-      </sprite>
+      <group onClick={onClick}>
+        <sprite position={[-0.85, 1.35, 0.1]} scale={[0.05, 0.05, 1]}>
+          <spriteMaterial map={icon} opacity={hide ? 0 : 1} />
+        </sprite>
+        <sprite scale={[0.3, 0.05, 0]} position={[-0.82, 1.21, 0.2]}>
+          <spriteMaterial map={textTexture} opacity={hide ? 0 : 1} />
+        </sprite>
+      </group>
     </group>
   )
 }

@@ -12,6 +12,7 @@ import { PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import Image from 'next/image'
 
+import { FrostguardCitadelSidebarContent } from '@/components/FrostguardCitadelSidebarContent'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect, useRef, useState } from 'react'
@@ -27,6 +28,7 @@ const Home = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const contentToElement: { [key: string]: JSX.Element } = {
     freljord: <FreljordSidebarContent />,
+    frostguardCitadel: <FrostguardCitadelSidebarContent />,
   }
   const [content, setContent] = useState('freljord')
 
