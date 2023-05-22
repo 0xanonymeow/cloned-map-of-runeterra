@@ -36,7 +36,6 @@ export const Web3Connect = ({
       autoConnect={false}
     >
       <ConnectionStatus setIsLoggedIn={setIsLoggedIn} />
-
       <div
         className="absolute top-[50%] left-[50%] z-10 translate-x-[-50%] translate-y-[-25%] flex flex-col items-center"
         style={{
