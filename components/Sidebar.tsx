@@ -14,8 +14,8 @@ export const Sidebar = ({
   return (
     <motion.div
       className="h-screen w-[400px] absolute top-0 right-0 z-10 "
-      initial={{ x: '100% ' }}
-      animate={{ x: isExpanded ? '0%' : '100%' }}
+      initial={{ x: '110% ' }}
+      animate={{ x: isExpanded ? '0%' : '110%' }}
       transition={{ easings: ['easeInOut'] }}
     >
       <DiamondButton onClick={() => setIsExpanded(false)} />
